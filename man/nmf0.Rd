@@ -6,7 +6,7 @@
 \usage{
 nmf0(Xmat, K = 1L, knownF, lambda1 = 0.1, lambda2 = 0.1,
   lambda3 = 0.1, tol = 1e-04, maxiter = 1000, verb = TRUE,
-  init_method = "random", semi = FALSE, hard_keep = NULL)
+  init_method = "random", hard_keep = NULL)
 }
 \arguments{
 \item{K}{the number of clusters to fit. Must be an integer.}
@@ -28,9 +28,6 @@ method is used.}
 
 \item{init_method}{The method for initializing the NMF method. Can be one of two values - random and svd.
 when init_method=random, the initial updates to L and F are decided randomly}
-
-\item{semi}{If FALSE, then enforces that the factor matrix is non-negative, else does not make that assumption,
-Default is FALSE.}
 
 \item{hard_keep}{The maximum number of clusters that are representative of each sample.}
 

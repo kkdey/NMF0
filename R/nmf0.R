@@ -17,8 +17,6 @@
 #' @param verb If TRUE, prints the progress of the model fit
 #' @param init_method The method for initializing the NMF method. Can be one of two values - random and svd.
 #'                    when init_method=random, the initial updates to L and F are decided randomly
-#' @param semi If FALSE, then enforces that the factor matrix is non-negative, else does not make that assumption,
-#'             Default is FALSE.
 #' @param hard_keep The maximum number of clusters that are representative of each sample.
 #'
 #' @return Outputs the best NMF0 fitted model for cluster K that includes the estimated L and F matrices, and the
@@ -37,10 +35,17 @@
 
 nmf0 = function(Xmat, K=1L, knownF, lambda1 = 0.1, lambda2 = 0.1, lambda3 = 0.1,
                 tol = 1e-04, maxiter = 1000, verb= TRUE,
-                init_method = "random", semi=FALSE, hard_keep = NULL){
+                init_method = "random", hard_keep = NULL){
 
   N = ncol(Xmat)
   G = nrow(Xmat)
+
+  if(min(Xmat) < 0){
+    semi = TRUE
+  }else{
+    semi = FALSE
+  }
+
 
   if(!is.numeric(K) | length(K) > 1){
     stop("K must be an integer scalar entry")
