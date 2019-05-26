@@ -107,7 +107,7 @@ nmf0 = function(Xmat, K=1L, knownF, lambda1 = 0.1, lambda2 = 0.1, lambda3 = 0.1,
       stop("knownF if present must have more than 1 column, if not present K must be greater than 0")
     }
   }else if (init_method == "random"){
-    avg = sqrt(mean(Xmat)/K2)
+    avg = sqrt(mean(abs(Xmat))/K2)
     Wold = avg * matrix( abs(rnorm(N*K2,mean=0,sd=1)), nrow = K2, ncol = N)
     if(missing(knownF)){
       if(semi){
@@ -172,7 +172,7 @@ nmf0 = function(Xmat, K=1L, knownF, lambda1 = 0.1, lambda2 = 0.1, lambda3 = 0.1,
     svdW = svd(Wnew)
     dd = svdW$d/(svdW$d^2 + lambda3)
     coef3 = t(svdW$u %*% diag(dd) %*% t(svdW$v) %*% t(Xmat))
-    if(semi==FALSE){
+    if(!semi){
       coef3[coef3 < 0] = 0
     }
     if(missing(knownF)){

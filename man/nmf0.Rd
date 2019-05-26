@@ -49,7 +49,7 @@ Fits a grade of membership model using non-negative matrix factorization using L
 \examples{
 
 data("ex.counts")
-out <- nmf0(t(ex.counts), K=4, tol=0.001, maxiter=50)
+out <- nmf0(t(ex.counts), K=4, tol=0.001, maxiter=1000, verb=FALSE)
 }
 \references{
 Hussein Hazimeh and Rahul Mazumder.2018. Fast Best Subset Selection:
